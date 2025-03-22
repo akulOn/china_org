@@ -52,3 +52,7 @@ export default tseslint.config({
   },
 })
 ```
+
+# Used commands
+- npm install @tanstack/react-router
+- npm install -D @tanstack/router-plugin @tanstack/react-router-devtools
