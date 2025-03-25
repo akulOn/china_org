@@ -54,5 +54,8 @@ export default tseslint.config({
 ```
 
 # Used commands
+- npm install tailwindcss @tailwindcss/vite
 - npm install @tanstack/react-router
 - npm install -D @tanstack/router-plugin @tanstack/react-router-devtools
+- npm i @tanstack/react-query
+- npm i -D @tanstack/eslint-plugin-query
