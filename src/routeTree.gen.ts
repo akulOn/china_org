@@ -11,22 +11,66 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as SellersIndexImport } from './routes/sellers/index'
+import { Route as ItemsIndexImport } from './routes/items/index'
+import { Route as BuyersIndexImport } from './routes/buyers/index'
+import { Route as SellersSellerIdImport } from './routes/sellers/$sellerId'
+import { Route as BuyersBuyerIdImport } from './routes/buyers/$buyerId'
+import { Route as ItemsItemIdIndexImport } from './routes/items/$itemId/index'
+import { Route as ItemsItemIdOptionsOptionIdImport } from './routes/items/$itemId/options/$optionId'
 
 // Create/Update Routes
-
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const SellersIndexRoute = SellersIndexImport.update({
+  id: '/sellers/',
+  path: '/sellers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ItemsIndexRoute = ItemsIndexImport.update({
+  id: '/items/',
+  path: '/items/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BuyersIndexRoute = BuyersIndexImport.update({
+  id: '/buyers/',
+  path: '/buyers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SellersSellerIdRoute = SellersSellerIdImport.update({
+  id: '/sellers/$sellerId',
+  path: '/sellers/$sellerId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BuyersBuyerIdRoute = BuyersBuyerIdImport.update({
+  id: '/buyers/$buyerId',
+  path: '/buyers/$buyerId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ItemsItemIdIndexRoute = ItemsItemIdIndexImport.update({
+  id: '/items/$itemId/',
+  path: '/items/$itemId/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ItemsItemIdOptionsOptionIdRoute = ItemsItemIdOptionsOptionIdImport.update(
+  {
+    id: '/items/$itemId/options/$optionId',
+    path: '/items/$itemId/options/$optionId',
+    getParentRoute: () => rootRoute,
+  } as any,
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -39,11 +83,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
+    '/buyers/$buyerId': {
+      id: '/buyers/$buyerId'
+      path: '/buyers/$buyerId'
+      fullPath: '/buyers/$buyerId'
+      preLoaderRoute: typeof BuyersBuyerIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/sellers/$sellerId': {
+      id: '/sellers/$sellerId'
+      path: '/sellers/$sellerId'
+      fullPath: '/sellers/$sellerId'
+      preLoaderRoute: typeof SellersSellerIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/buyers/': {
+      id: '/buyers/'
+      path: '/buyers'
+      fullPath: '/buyers'
+      preLoaderRoute: typeof BuyersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/': {
+      id: '/items/'
+      path: '/items'
+      fullPath: '/items'
+      preLoaderRoute: typeof ItemsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sellers/': {
+      id: '/sellers/'
+      path: '/sellers'
+      fullPath: '/sellers'
+      preLoaderRoute: typeof SellersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId/': {
+      id: '/items/$itemId/'
+      path: '/items/$itemId'
+      fullPath: '/items/$itemId'
+      preLoaderRoute: typeof ItemsItemIdIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId/options/$optionId': {
+      id: '/items/$itemId/options/$optionId'
+      path: '/items/$itemId/options/$optionId'
+      fullPath: '/items/$itemId/options/$optionId'
+      preLoaderRoute: typeof ItemsItemIdOptionsOptionIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +139,92 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers': typeof BuyersIndexRoute
+  '/items': typeof ItemsIndexRoute
+  '/sellers': typeof SellersIndexRoute
+  '/items/$itemId': typeof ItemsItemIdIndexRoute
+  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers': typeof BuyersIndexRoute
+  '/items': typeof ItemsIndexRoute
+  '/sellers': typeof SellersIndexRoute
+  '/items/$itemId': typeof ItemsItemIdIndexRoute
+  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers/': typeof BuyersIndexRoute
+  '/items/': typeof ItemsIndexRoute
+  '/sellers/': typeof SellersIndexRoute
+  '/items/$itemId/': typeof ItemsItemIdIndexRoute
+  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/buyers/$buyerId'
+    | '/sellers/$sellerId'
+    | '/buyers'
+    | '/items'
+    | '/sellers'
+    | '/items/$itemId'
+    | '/items/$itemId/options/$optionId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/buyers/$buyerId'
+    | '/sellers/$sellerId'
+    | '/buyers'
+    | '/items'
+    | '/sellers'
+    | '/items/$itemId'
+    | '/items/$itemId/options/$optionId'
+  id:
+    | '__root__'
+    | '/'
+    | '/buyers/$buyerId'
+    | '/sellers/$sellerId'
+    | '/buyers/'
+    | '/items/'
+    | '/sellers/'
+    | '/items/$itemId/'
+    | '/items/$itemId/options/$optionId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  BuyersBuyerIdRoute: typeof BuyersBuyerIdRoute
+  SellersSellerIdRoute: typeof SellersSellerIdRoute
+  BuyersIndexRoute: typeof BuyersIndexRoute
+  ItemsIndexRoute: typeof ItemsIndexRoute
+  SellersIndexRoute: typeof SellersIndexRoute
+  ItemsItemIdIndexRoute: typeof ItemsItemIdIndexRoute
+  ItemsItemIdOptionsOptionIdRoute: typeof ItemsItemIdOptionsOptionIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  BuyersBuyerIdRoute: BuyersBuyerIdRoute,
+  SellersSellerIdRoute: SellersSellerIdRoute,
+  BuyersIndexRoute: BuyersIndexRoute,
+  ItemsIndexRoute: ItemsIndexRoute,
+  SellersIndexRoute: SellersIndexRoute,
+  ItemsItemIdIndexRoute: ItemsItemIdIndexRoute,
+  ItemsItemIdOptionsOptionIdRoute: ItemsItemIdOptionsOptionIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +238,38 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/buyers/$buyerId",
+        "/sellers/$sellerId",
+        "/buyers/",
+        "/items/",
+        "/sellers/",
+        "/items/$itemId/",
+        "/items/$itemId/options/$optionId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/buyers/$buyerId": {
+      "filePath": "buyers/$buyerId.tsx"
+    },
+    "/sellers/$sellerId": {
+      "filePath": "sellers/$sellerId.tsx"
+    },
+    "/buyers/": {
+      "filePath": "buyers/index.tsx"
+    },
+    "/items/": {
+      "filePath": "items/index.tsx"
+    },
+    "/sellers/": {
+      "filePath": "sellers/index.tsx"
+    },
+    "/items/$itemId/": {
+      "filePath": "items/$itemId/index.tsx"
+    },
+    "/items/$itemId/options/$optionId": {
+      "filePath": "items/$itemId/options/$optionId.tsx"
     }
   }
 }

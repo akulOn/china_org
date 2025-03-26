@@ -1,20 +1,40 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import {
+  createRootRoute,
+  Link,
+  Outlet,
+  useRouterState,
+} from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
-  component: () => (
-    <>
-      <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-      </div>
-      <hr />
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
+  component: () => {
+    const location = useRouterState({ select: (s) => s.location });
+    const splitPath = location.pathname.split("/");
+    const itemPathIndex = splitPath.findIndex((x) => x === "items");
+    const itemIdIndex =
+      itemPathIndex !== -1 ? splitPath[itemPathIndex + 1] : undefined;
+
+    return (
+      <>
+        <div className="p-2 flex gap-2">
+          <Link to="/" className="[&.active]:font-bold">
+            Home
+          </Link>
+          <Link to="/items" className="[&.active]:font-bold">
+            Items
+          </Link>
+          {itemIdIndex && <span className="font-bold">{itemIdIndex}</span>}
+          <Link to="/buyers" className="[&.active]:font-bold">
+            Buyers
+          </Link>
+          <Link to="/sellers" className="[&.active]:font-bold">
+            Sellers
+          </Link>
+        </div>
+        <hr />
+        <Outlet />
+        <TanStackRouterDevtools />
+      </>
+    );
+  },
+});
