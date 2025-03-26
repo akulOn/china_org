@@ -7,5 +7,9 @@ export const Route = createFileRoute("/items/$itemId/options/$optionId")({
 function RouteComponent() {
   const { itemId, optionId } = Route.useParams();
 
-  return <div>Hello "/options/$optionId"!</div>;
+  return (
+    <div>
+      Welcome to item: {itemId} option: {optionId}
+    </div>
+  );
 }

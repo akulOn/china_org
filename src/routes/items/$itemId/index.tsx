@@ -16,7 +16,7 @@ function RouteComponent() {
       <div>
         <ul>
           {options.map((optionId) => (
-            <li>
+            <li key={optionId}>
               <Link to={`/items/${itemId}/options/${optionId}`}>
                 {optionId}
               </Link>
