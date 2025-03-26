@@ -9,8 +9,10 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 export const Route = createRootRoute({
   component: () => {
     const location = useRouterState({ select: (s) => s.location });
-
-    console.log(location.pathname);
+    const splitPath = location.pathname.split("/");
+    const itemPathIndex = splitPath.findIndex((x) => x === "items");
+    const itemIdIndex =
+      itemPathIndex !== -1 ? splitPath[itemPathIndex + 1] : undefined;
 
     return (
       <>
@@ -21,6 +23,7 @@ export const Route = createRootRoute({
           <Link to="/items" className="[&.active]:font-bold">
             Items
           </Link>
+          {itemIdIndex && <span className="font-bold">{itemIdIndex}</span>}
           <Link to="/buyers" className="[&.active]:font-bold">
             Buyers
           </Link>
