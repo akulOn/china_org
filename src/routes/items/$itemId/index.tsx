@@ -4,7 +4,7 @@ export const Route = createFileRoute("/items/$itemId/")({
   component: RouteComponent,
 });
 
-const options = [1, 2, 3];
+const options = ["1", "2", "3"];
 
 function RouteComponent() {
   const { itemId } = Route.useParams();
@@ -17,7 +17,10 @@ function RouteComponent() {
         <ul>
           {options.map((optionId) => (
             <li key={optionId}>
-              <Link to={`/items/${itemId}/options/${optionId}`}>
+              <Link
+                to={`/items/$itemId/options/$optionId`}
+                params={{ itemId, optionId }}
+              >
                 {optionId}
               </Link>
             </li>

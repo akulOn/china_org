@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/items/")({
   component: RouteComponent,
 });
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const items = ["gloves", "umbrella", "USB", "Glasses", "Knives"];
 
 function RouteComponent() {
   return (
@@ -13,7 +13,8 @@ function RouteComponent() {
           <Link
             key={itemId}
             className="border-1 hover:cursor-pointer"
-            to={`/items/${itemId}`}
+            to={`/items/$itemId`}
+            params={{ itemId }}
           >
             {itemId}
           </Link>
