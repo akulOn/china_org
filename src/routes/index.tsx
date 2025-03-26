@@ -1,13 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 function Index() {
   return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
+    <div className="p-2 bg-red-50">
+      <div className="grid grid-cols-3 gap-4">
+        {items.map((itemId) => (
+          <Link
+            key={itemId}
+            className="border-1 hover:cursor-pointer"
+            to={`/items/${itemId}`}
+          >
+            {itemId}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

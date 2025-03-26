@@ -11,20 +11,55 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as SellersIndexImport } from './routes/sellers/index'
+import { Route as BuyersIndexImport } from './routes/buyers/index'
+import { Route as SellersSellerIdImport } from './routes/sellers/$sellerId'
+import { Route as OptionsOptionIdImport } from './routes/options/$optionId'
+import { Route as ItemsItemIdImport } from './routes/items/$itemId'
+import { Route as BuyersBuyerIdImport } from './routes/buyers/$buyerId'
 
 // Create/Update Routes
-
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SellersIndexRoute = SellersIndexImport.update({
+  id: '/sellers/',
+  path: '/sellers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BuyersIndexRoute = BuyersIndexImport.update({
+  id: '/buyers/',
+  path: '/buyers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SellersSellerIdRoute = SellersSellerIdImport.update({
+  id: '/sellers/$sellerId',
+  path: '/sellers/$sellerId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OptionsOptionIdRoute = OptionsOptionIdImport.update({
+  id: '/options/$optionId',
+  path: '/options/$optionId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ItemsItemIdRoute = ItemsItemIdImport.update({
+  id: '/items/$itemId',
+  path: '/items/$itemId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BuyersBuyerIdRoute = BuyersBuyerIdImport.update({
+  id: '/buyers/$buyerId',
+  path: '/buyers/$buyerId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +74,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
+    '/buyers/$buyerId': {
+      id: '/buyers/$buyerId'
+      path: '/buyers/$buyerId'
+      fullPath: '/buyers/$buyerId'
+      preLoaderRoute: typeof BuyersBuyerIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId': {
+      id: '/items/$itemId'
+      path: '/items/$itemId'
+      fullPath: '/items/$itemId'
+      preLoaderRoute: typeof ItemsItemIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/options/$optionId': {
+      id: '/options/$optionId'
+      path: '/options/$optionId'
+      fullPath: '/options/$optionId'
+      preLoaderRoute: typeof OptionsOptionIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/sellers/$sellerId': {
+      id: '/sellers/$sellerId'
+      path: '/sellers/$sellerId'
+      fullPath: '/sellers/$sellerId'
+      preLoaderRoute: typeof SellersSellerIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/buyers/': {
+      id: '/buyers/'
+      path: '/buyers'
+      fullPath: '/buyers'
+      preLoaderRoute: typeof BuyersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sellers/': {
+      id: '/sellers/'
+      path: '/sellers'
+      fullPath: '/sellers'
+      preLoaderRoute: typeof SellersIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +123,84 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/items/$itemId': typeof ItemsItemIdRoute
+  '/options/$optionId': typeof OptionsOptionIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers': typeof BuyersIndexRoute
+  '/sellers': typeof SellersIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/items/$itemId': typeof ItemsItemIdRoute
+  '/options/$optionId': typeof OptionsOptionIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers': typeof BuyersIndexRoute
+  '/sellers': typeof SellersIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/buyers/$buyerId': typeof BuyersBuyerIdRoute
+  '/items/$itemId': typeof ItemsItemIdRoute
+  '/options/$optionId': typeof OptionsOptionIdRoute
+  '/sellers/$sellerId': typeof SellersSellerIdRoute
+  '/buyers/': typeof BuyersIndexRoute
+  '/sellers/': typeof SellersIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/buyers/$buyerId'
+    | '/items/$itemId'
+    | '/options/$optionId'
+    | '/sellers/$sellerId'
+    | '/buyers'
+    | '/sellers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/buyers/$buyerId'
+    | '/items/$itemId'
+    | '/options/$optionId'
+    | '/sellers/$sellerId'
+    | '/buyers'
+    | '/sellers'
+  id:
+    | '__root__'
+    | '/'
+    | '/buyers/$buyerId'
+    | '/items/$itemId'
+    | '/options/$optionId'
+    | '/sellers/$sellerId'
+    | '/buyers/'
+    | '/sellers/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  BuyersBuyerIdRoute: typeof BuyersBuyerIdRoute
+  ItemsItemIdRoute: typeof ItemsItemIdRoute
+  OptionsOptionIdRoute: typeof OptionsOptionIdRoute
+  SellersSellerIdRoute: typeof SellersSellerIdRoute
+  BuyersIndexRoute: typeof BuyersIndexRoute
+  SellersIndexRoute: typeof SellersIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  BuyersBuyerIdRoute: BuyersBuyerIdRoute,
+  ItemsItemIdRoute: ItemsItemIdRoute,
+  OptionsOptionIdRoute: OptionsOptionIdRoute,
+  SellersSellerIdRoute: SellersSellerIdRoute,
+  BuyersIndexRoute: BuyersIndexRoute,
+  SellersIndexRoute: SellersIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +214,34 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/buyers/$buyerId",
+        "/items/$itemId",
+        "/options/$optionId",
+        "/sellers/$sellerId",
+        "/buyers/",
+        "/sellers/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/buyers/$buyerId": {
+      "filePath": "buyers/$buyerId.tsx"
+    },
+    "/items/$itemId": {
+      "filePath": "items/$itemId.tsx"
+    },
+    "/options/$optionId": {
+      "filePath": "options/$optionId.tsx"
+    },
+    "/sellers/$sellerId": {
+      "filePath": "sellers/$sellerId.tsx"
+    },
+    "/buyers/": {
+      "filePath": "buyers/index.tsx"
+    },
+    "/sellers/": {
+      "filePath": "sellers/index.tsx"
     }
   }
 }
