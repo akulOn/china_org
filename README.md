@@ -61,3 +61,4 @@ export default tseslint.config({
 - npm i @tanstack/react-query
 - npm i -D @tanstack/eslint-plugin-query
 - npm i @tanstack/react-query-devtools
+- npm install @tanstack/react-table
