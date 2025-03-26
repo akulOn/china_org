@@ -4,22 +4,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 function Index() {
   return (
-    <div className="p-2 bg-red-50">
-      <div className="grid grid-cols-3 gap-4">
-        {items.map((itemId) => (
-          <Link
-            key={itemId}
-            className="border-1 hover:cursor-pointer"
-            to={`/items/${itemId}`}
-          >
-            {itemId}
-          </Link>
-        ))}
+    <>
+      <h1>
+        Welcome to the Home page of:{" "}
+        <span className="p-1 font-bold">CHINA ORG</span>
+      </h1>
+      <div>
+        <span>Please navigate to the items page:</span>
+        <Link className="p-1 font-bold" to={"/items"}>
+          ITEMS
+        </Link>
       </div>
-    </div>
+    </>
   );
 }
