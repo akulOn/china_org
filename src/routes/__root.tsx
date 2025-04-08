@@ -23,7 +23,11 @@ export const Route = createRootRoute({
           <Link to="/items" className="[&.active]:font-bold">
             Items
           </Link>
-          {itemIdIndex && <span className="font-bold">{itemIdIndex}</span>}
+          {itemIdIndex && (
+            <span className="font-bold px-1 border-x-1 border-black">
+              {itemIdIndex}
+            </span>
+          )}
           <Link to="/buyers" className="[&.active]:font-bold">
             Buyers
           </Link>
@@ -32,7 +36,9 @@ export const Route = createRootRoute({
           </Link>
         </div>
         <hr />
-        <Outlet />
+        <div className="m-1">
+          <Outlet />
+        </div>
         <TanStackRouterDevtools />
       </>
     );
