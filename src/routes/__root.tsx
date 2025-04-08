@@ -15,8 +15,8 @@ export const Route = createRootRoute({
       itemsPathIndex !== -1 ? splitPath[itemsPathIndex + 1] : undefined;
 
     return (
-      <>
-        <div className="p-2 flex gap-2">
+      <div className="flex flex-col h-dvh">
+        <div className="p-2 flex flex-none gap-2">
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>
@@ -40,11 +40,11 @@ export const Route = createRootRoute({
           </Link>
         </div>
         <hr />
-        <div className="m-1">
+        <div className="flex-1 p-1">
           <Outlet />
         </div>
         <TanStackRouterDevtools />
-      </>
+      </div>
     );
   },
 });
