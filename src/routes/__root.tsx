@@ -10,9 +10,9 @@ export const Route = createRootRoute({
   component: () => {
     const location = useRouterState({ select: (s) => s.location });
     const splitPath = location.pathname.split("/");
-    const itemPathIndex = splitPath.findIndex((x) => x === "items");
-    const itemIdIndex =
-      itemPathIndex !== -1 ? splitPath[itemPathIndex + 1] : undefined;
+    const itemsPathIndex = splitPath.findIndex((x) => x === "items");
+    const itemName =
+      itemsPathIndex !== -1 ? splitPath[itemsPathIndex + 1] : undefined;
 
     return (
       <>
@@ -23,10 +23,14 @@ export const Route = createRootRoute({
           <Link to="/items" className="[&.active]:font-bold">
             Items
           </Link>
-          {itemIdIndex && (
-            <span className="font-bold px-1 border-x-1 border-black">
-              {itemIdIndex}
-            </span>
+          {itemName && (
+            <Link
+              className="font-bold px-1 border-x-1 border-black"
+              to={"/items/$itemId"}
+              params={{ itemId: itemName }}
+            >
+              {itemName}
+            </Link>
           )}
           <Link to="/buyers" className="[&.active]:font-bold">
             Buyers

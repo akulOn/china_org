@@ -12,12 +12,13 @@ function RouteComponent() {
   return (
     <>
       <div>Hello to item: {itemId}</div>
-      <div>Please navigate to any option</div>
+      <div>Please navigate to any option:</div>
       <div>
         <ul>
           {options.map((optionId) => (
             <li key={optionId}>
               <Link
+                className="p-1"
                 to={`/items/$itemId/options/$optionId`}
                 params={{ itemId, optionId }}
               >
