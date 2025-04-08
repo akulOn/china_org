@@ -11,7 +11,6 @@ function RouteComponent() {
 
   return (
     <>
-      <div>Hello to item: {itemId}</div>
       <div>Please navigate to any option:</div>
       <div>
         <ul>
