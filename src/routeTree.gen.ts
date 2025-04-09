@@ -18,7 +18,10 @@ import { Route as BuyersIndexImport } from './routes/buyers/index'
 import { Route as SellersSellerIdImport } from './routes/sellers/$sellerId'
 import { Route as BuyersBuyerIdImport } from './routes/buyers/$buyerId'
 import { Route as ItemsItemIdIndexImport } from './routes/items/$itemId/index'
-import { Route as ItemsItemIdOptionsOptionIdImport } from './routes/items/$itemId/options/$optionId'
+import { Route as ItemsItemIdCategoriesIndexImport } from './routes/items/$itemId/categories/index'
+import { Route as ItemsItemIdCategoriesItemCategoryIdIndexImport } from './routes/items/$itemId/categories/$itemCategoryId/index'
+import { Route as ItemsItemIdCategoriesItemCategoryIdOptionsIndexImport } from './routes/items/$itemId/categories/$itemCategoryId/options/index'
+import { Route as ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdImport } from './routes/items/$itemId/categories/$itemCategoryId/options/$optionId'
 
 // Create/Update Routes
 
@@ -64,13 +67,34 @@ const ItemsItemIdIndexRoute = ItemsItemIdIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ItemsItemIdOptionsOptionIdRoute = ItemsItemIdOptionsOptionIdImport.update(
+const ItemsItemIdCategoriesIndexRoute = ItemsItemIdCategoriesIndexImport.update(
   {
-    id: '/items/$itemId/options/$optionId',
-    path: '/items/$itemId/options/$optionId',
+    id: '/items/$itemId/categories/',
+    path: '/items/$itemId/categories/',
     getParentRoute: () => rootRoute,
   } as any,
 )
+
+const ItemsItemIdCategoriesItemCategoryIdIndexRoute =
+  ItemsItemIdCategoriesItemCategoryIdIndexImport.update({
+    id: '/items/$itemId/categories/$itemCategoryId/',
+    path: '/items/$itemId/categories/$itemCategoryId/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute =
+  ItemsItemIdCategoriesItemCategoryIdOptionsIndexImport.update({
+    id: '/items/$itemId/categories/$itemCategoryId/options/',
+    path: '/items/$itemId/categories/$itemCategoryId/options/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute =
+  ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdImport.update({
+    id: '/items/$itemId/categories/$itemCategoryId/options/$optionId',
+    path: '/items/$itemId/categories/$itemCategoryId/options/$optionId',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -125,11 +149,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItemsItemIdIndexImport
       parentRoute: typeof rootRoute
     }
-    '/items/$itemId/options/$optionId': {
-      id: '/items/$itemId/options/$optionId'
-      path: '/items/$itemId/options/$optionId'
-      fullPath: '/items/$itemId/options/$optionId'
-      preLoaderRoute: typeof ItemsItemIdOptionsOptionIdImport
+    '/items/$itemId/categories/': {
+      id: '/items/$itemId/categories/'
+      path: '/items/$itemId/categories'
+      fullPath: '/items/$itemId/categories'
+      preLoaderRoute: typeof ItemsItemIdCategoriesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId/categories/$itemCategoryId/': {
+      id: '/items/$itemId/categories/$itemCategoryId/'
+      path: '/items/$itemId/categories/$itemCategoryId'
+      fullPath: '/items/$itemId/categories/$itemCategoryId'
+      preLoaderRoute: typeof ItemsItemIdCategoriesItemCategoryIdIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId/categories/$itemCategoryId/options/$optionId': {
+      id: '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+      path: '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+      fullPath: '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+      preLoaderRoute: typeof ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId/categories/$itemCategoryId/options/': {
+      id: '/items/$itemId/categories/$itemCategoryId/options/'
+      path: '/items/$itemId/categories/$itemCategoryId/options'
+      fullPath: '/items/$itemId/categories/$itemCategoryId/options'
+      preLoaderRoute: typeof ItemsItemIdCategoriesItemCategoryIdOptionsIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -145,7 +190,10 @@ export interface FileRoutesByFullPath {
   '/items': typeof ItemsIndexRoute
   '/sellers': typeof SellersIndexRoute
   '/items/$itemId': typeof ItemsItemIdIndexRoute
-  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
+  '/items/$itemId/categories': typeof ItemsItemIdCategoriesIndexRoute
+  '/items/$itemId/categories/$itemCategoryId': typeof ItemsItemIdCategoriesItemCategoryIdIndexRoute
+  '/items/$itemId/categories/$itemCategoryId/options/$optionId': typeof ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute
+  '/items/$itemId/categories/$itemCategoryId/options': typeof ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -156,7 +204,10 @@ export interface FileRoutesByTo {
   '/items': typeof ItemsIndexRoute
   '/sellers': typeof SellersIndexRoute
   '/items/$itemId': typeof ItemsItemIdIndexRoute
-  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
+  '/items/$itemId/categories': typeof ItemsItemIdCategoriesIndexRoute
+  '/items/$itemId/categories/$itemCategoryId': typeof ItemsItemIdCategoriesItemCategoryIdIndexRoute
+  '/items/$itemId/categories/$itemCategoryId/options/$optionId': typeof ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute
+  '/items/$itemId/categories/$itemCategoryId/options': typeof ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute
 }
 
 export interface FileRoutesById {
@@ -168,7 +219,10 @@ export interface FileRoutesById {
   '/items/': typeof ItemsIndexRoute
   '/sellers/': typeof SellersIndexRoute
   '/items/$itemId/': typeof ItemsItemIdIndexRoute
-  '/items/$itemId/options/$optionId': typeof ItemsItemIdOptionsOptionIdRoute
+  '/items/$itemId/categories/': typeof ItemsItemIdCategoriesIndexRoute
+  '/items/$itemId/categories/$itemCategoryId/': typeof ItemsItemIdCategoriesItemCategoryIdIndexRoute
+  '/items/$itemId/categories/$itemCategoryId/options/$optionId': typeof ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute
+  '/items/$itemId/categories/$itemCategoryId/options/': typeof ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -181,7 +235,10 @@ export interface FileRouteTypes {
     | '/items'
     | '/sellers'
     | '/items/$itemId'
-    | '/items/$itemId/options/$optionId'
+    | '/items/$itemId/categories'
+    | '/items/$itemId/categories/$itemCategoryId'
+    | '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+    | '/items/$itemId/categories/$itemCategoryId/options'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -191,7 +248,10 @@ export interface FileRouteTypes {
     | '/items'
     | '/sellers'
     | '/items/$itemId'
-    | '/items/$itemId/options/$optionId'
+    | '/items/$itemId/categories'
+    | '/items/$itemId/categories/$itemCategoryId'
+    | '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+    | '/items/$itemId/categories/$itemCategoryId/options'
   id:
     | '__root__'
     | '/'
@@ -201,7 +261,10 @@ export interface FileRouteTypes {
     | '/items/'
     | '/sellers/'
     | '/items/$itemId/'
-    | '/items/$itemId/options/$optionId'
+    | '/items/$itemId/categories/'
+    | '/items/$itemId/categories/$itemCategoryId/'
+    | '/items/$itemId/categories/$itemCategoryId/options/$optionId'
+    | '/items/$itemId/categories/$itemCategoryId/options/'
   fileRoutesById: FileRoutesById
 }
 
@@ -213,7 +276,10 @@ export interface RootRouteChildren {
   ItemsIndexRoute: typeof ItemsIndexRoute
   SellersIndexRoute: typeof SellersIndexRoute
   ItemsItemIdIndexRoute: typeof ItemsItemIdIndexRoute
-  ItemsItemIdOptionsOptionIdRoute: typeof ItemsItemIdOptionsOptionIdRoute
+  ItemsItemIdCategoriesIndexRoute: typeof ItemsItemIdCategoriesIndexRoute
+  ItemsItemIdCategoriesItemCategoryIdIndexRoute: typeof ItemsItemIdCategoriesItemCategoryIdIndexRoute
+  ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute: typeof ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute
+  ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute: typeof ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -224,7 +290,13 @@ const rootRouteChildren: RootRouteChildren = {
   ItemsIndexRoute: ItemsIndexRoute,
   SellersIndexRoute: SellersIndexRoute,
   ItemsItemIdIndexRoute: ItemsItemIdIndexRoute,
-  ItemsItemIdOptionsOptionIdRoute: ItemsItemIdOptionsOptionIdRoute,
+  ItemsItemIdCategoriesIndexRoute: ItemsItemIdCategoriesIndexRoute,
+  ItemsItemIdCategoriesItemCategoryIdIndexRoute:
+    ItemsItemIdCategoriesItemCategoryIdIndexRoute,
+  ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute:
+    ItemsItemIdCategoriesItemCategoryIdOptionsOptionIdRoute,
+  ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute:
+    ItemsItemIdCategoriesItemCategoryIdOptionsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -244,7 +316,10 @@ export const routeTree = rootRoute
         "/items/",
         "/sellers/",
         "/items/$itemId/",
-        "/items/$itemId/options/$optionId"
+        "/items/$itemId/categories/",
+        "/items/$itemId/categories/$itemCategoryId/",
+        "/items/$itemId/categories/$itemCategoryId/options/$optionId",
+        "/items/$itemId/categories/$itemCategoryId/options/"
       ]
     },
     "/": {
@@ -268,8 +343,17 @@ export const routeTree = rootRoute
     "/items/$itemId/": {
       "filePath": "items/$itemId/index.tsx"
     },
-    "/items/$itemId/options/$optionId": {
-      "filePath": "items/$itemId/options/$optionId.tsx"
+    "/items/$itemId/categories/": {
+      "filePath": "items/$itemId/categories/index.tsx"
+    },
+    "/items/$itemId/categories/$itemCategoryId/": {
+      "filePath": "items/$itemId/categories/$itemCategoryId/index.tsx"
+    },
+    "/items/$itemId/categories/$itemCategoryId/options/$optionId": {
+      "filePath": "items/$itemId/categories/$itemCategoryId/options/$optionId.tsx"
+    },
+    "/items/$itemId/categories/$itemCategoryId/options/": {
+      "filePath": "items/$itemId/categories/$itemCategoryId/options/index.tsx"
     }
   }
 }
