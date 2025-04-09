@@ -18,7 +18,7 @@ function RouteComponent() {
             <li key={optionId}>
               <Link
                 className="p-1"
-                to={"/items/$itemId/categories"}
+                to={"/items/$itemId/options/$optionId"}
                 params={{ itemId, optionId }}
               >
                 {optionId}

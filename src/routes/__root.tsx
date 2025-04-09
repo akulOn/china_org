@@ -95,7 +95,7 @@ export const Route = createRootRoute({
           </Menu>
         </div>
         <hr />
-        <div className="flex-1 p-1">
+        <div className="flex-1 p-1 bg-neutral-100">
           <Outlet />
         </div>
         <TanStackRouterDevtools />
