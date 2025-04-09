@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   FormControl,
+  FormControlLabel,
+  FormLabel,
   Input,
   InputAdornment,
   InputLabel,
-  Paper,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
@@ -119,7 +122,7 @@ function RouteComponent() {
   const [displayedItems, setDisplayedItems] = useState([...items]);
 
   return (
-    <div className="flex flex-col gap-5 p-2 items-center">
+    <div className="flex flex-col items-center justify-center gap-5 p-2">
       <FormControl variant="standard">
         <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
         <Input
@@ -142,21 +145,47 @@ function RouteComponent() {
           }}
         />
       </FormControl>
-      <div className="grid grid-cols-3 gap-4">
-        {displayedItems.map((item) => (
-          <Link
-            key={item.id}
-            className="
+      <div className="flex">
+        <FormControl>
+          <FormLabel id="demo-radio-buttons-group-label">Category</FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="kitchen"
+            name="radio-buttons-group"
+          >
+            <FormControlLabel
+              value="kitchen"
+              control={<Radio />}
+              label="Kitchen"
+            />
+            <FormControlLabel
+              value="bathroom"
+              control={<Radio />}
+              label="Bathroom"
+            />
+            <FormControlLabel
+              value="outdoors"
+              control={<Radio />}
+              label="Outdoors"
+            />
+          </RadioGroup>
+        </FormControl>
+        <div className="grid grid-cols-3 gap-4">
+          {displayedItems.map((item) => (
+            <Link
+              key={item.id}
+              className="
               flex items-center justify-center
               w-50 h-50
               border border-gray-400 bg-amber-50
               hover:cursor-pointer"
-            to={`/items/$itemId`}
-            params={{ itemId: String(item.id) }}
-          >
-            {item.name}
-          </Link>
-        ))}
+              to={`/items/$itemId`}
+              params={{ itemId: String(item.id) }}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
