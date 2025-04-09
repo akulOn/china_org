@@ -41,9 +41,8 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 export default function RouteComponent() {
   return (
-    <div className="h-100">
+    <div className="px-10 h-100">
       <DataGrid
-        className="px-10"
         rows={rows}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}

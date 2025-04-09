@@ -2,7 +2,6 @@ import {
   Box,
   Collapse,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -146,7 +145,7 @@ function Row(props: { row: Customer }) {
 
 function RouteComponent() {
   return (
-    <TableContainer className="px-10" component={Paper}>
+    <TableContainer className="px-10">
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
