@@ -7,19 +7,22 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <Box className="flex flex-col justify-center-safe gap-2 bg-amber-100">
-      <span>Welcome. Pick.</span>
-      <div className="flex flex-row gap-2 [&>*]:w-30 [&>*]:h-30">
-        <Link className="bg-amber-50 border rounded-xs" to={"/items"}>
+    <Box className="flex flex-col gap-2 items-center">
+      <span className="text-5xl">Welcome. Pick.</span>
+      <Box
+        className="flex flex-row gap-2 
+          *:w-30 *:h-30 *:bg-amber-50 *:border *:rounded-xs *:flex *:justify-center *:items-center *:text-lg"
+      >
+        <Link to={"/items"}>
           <span>Items</span>
         </Link>
-        <Link className="bg-amber-50 border rounded-xs" to={"/buyers"}>
+        <Link to={"/buyers"}>
           <span>Buyers</span>
         </Link>
-        <Link className="bg-amber-50 border rounded-xs" to={"/sellers"}>
+        <Link to={"/sellers"}>
           <span>Sellers</span>
         </Link>
-      </div>
+      </Box>
     </Box>
   );
 }

@@ -15,8 +15,8 @@ export const Route = createRootRoute({
       itemsPathIndex !== -1 ? splitPath[itemsPathIndex + 1] : undefined;
 
     return (
-      <div className="flex flex-col h-dvh">
-        <div className="p-2 flex flex-none gap-2">
+      <div className="flex flex-col h-dvh bg-neutral-100">
+        <div className="flex flex-none gap-2 p-2 justify-center *:text-2xl">
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>
