@@ -41,19 +41,21 @@ export const Route = createRootRoute({
 
     return (
       <div className="flex flex-col h-dvh bg-neutral-100">
-        <div className="flex flex-none gap-2 p-2 justify-center *:text-2xl *:hover:underline">
+        <div className="flex flex-none gap-2 p-2 justify-between *:text-2xl [&_a]:hover:underline">
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>
-          <Link to="/items" className="[&.active]:font-bold">
-            Items
-          </Link>
-          <Link to="/buyers" className="[&.active]:font-bold">
-            Buyers
-          </Link>
-          <Link to="/sellers" className="[&.active]:font-bold">
-            Sellers
-          </Link>
+          <div className="flex gap-2">
+            <Link to="/items" className="[&.active]:font-bold">
+              Items
+            </Link>
+            <Link to="/buyers" className="[&.active]:font-bold">
+              Buyers
+            </Link>
+            <Link to="/sellers" className="[&.active]:font-bold">
+              Sellers
+            </Link>
+          </div>
           <Button
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
