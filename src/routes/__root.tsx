@@ -17,11 +17,11 @@ interface CountryType {
 const countries: readonly CountryType[] = [
   {
     code: "US",
-    label: "United States",
+    label: "American",
     phone: "1",
   },
-  { code: "RS", label: "Serbia", phone: "381" },
-  { code: "CN", label: "China", phone: "86" },
+  { code: "RS", label: "Srpski", phone: "381" },
+  { code: "CN", label: "中文", phone: "86" },
 ];
 
 export const Route = createRootRoute({
