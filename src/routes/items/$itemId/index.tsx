@@ -1,4 +1,13 @@
+import {
+  Button,
+  FormControl,
+  Input,
+  InputAdornment,
+  InputLabel,
+} from "@mui/material";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
 
 export const Route = createFileRoute("/items/$itemId/")({
   component: RouteComponent,
@@ -50,26 +59,55 @@ const options: OptionType[] = [
 ];
 
 function RouteComponent() {
+  const [displayedOptions, setDisplayedOptions] = useState<OptionType[]>([
+    ...options,
+  ]);
   const { itemId } = Route.useParams();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 p-2">
-      <div>Please navigate to any option:</div>
-      <div className="grid grid-cols-3 gap-4">
-        {options.map((option) => (
-          <Link
-            key={option.id}
-            className="
+    <div className="flex justify-center gap-5 p-2">
+      <div className="flex flex-col gap-2">
+        <Button id="basic-button">Type</Button>
+      </div>
+      <div className="flex flex-col gap-2">
+        <FormControl variant="standard">
+          <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setDisplayedOptions(
+                ...[
+                  options.filter((option) =>
+                    option.name
+                      .toLowerCase()
+                      .includes(event.target.value.toLowerCase())
+                  ),
+                ]
+              );
+            }}
+          />
+        </FormControl>
+        <div className="grid grid-cols-3 gap-4">
+          {displayedOptions.map((option) => (
+            <Link
+              key={option.id}
+              className="
               flex items-center justify-center
               w-50 h-50
               border border-gray-400 bg-amber-50
               hover:cursor-pointer"
-            to={`/items/$itemId/options/$optionId`}
-            params={{ itemId: String(itemId), optionId: String(option.id) }}
-          >
-            {option.name}
-          </Link>
-        ))}
+              to={`/items/$itemId/options/$optionId`}
+              params={{ itemId: String(itemId), optionId: String(option.id) }}
+            >
+              {option.name}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
