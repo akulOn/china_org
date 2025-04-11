@@ -20,6 +20,9 @@ declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
+  interface HistoryState {
+    currentOptionName?: string;
+  }
 }
 
 // Render the app
@@ -31,7 +34,7 @@ if (!rootElement.innerHTML) {
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
+        <RouterProvider basepath={import.meta.env.BASE_URL} router={router} />
       </QueryClientProvider>
     </StrictMode>
   );

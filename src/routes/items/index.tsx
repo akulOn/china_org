@@ -284,6 +284,7 @@ function RouteComponent() {
               hover:cursor-pointer"
               to={`/items/$itemId`}
               params={{ itemId: String(item.id) }}
+              state={{ currentOptionName: item.name }}
             >
               {item.name}
             </Link>

@@ -1,5 +1,10 @@
 import { Paper } from "@mui/material";
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  useParams,
+  useRouterState,
+} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/items/$itemId/options/$optionId")({
   component: RouteComponent,
@@ -15,9 +20,13 @@ const option = {
 
 function RouteComponent() {
   const { itemId } = useParams({ strict: false });
+  const { currentOptionName } = useRouterState({
+    select: (s) => s.location.state,
+  });
 
   return (
     <div className="flex gap-2">
+      <div>{currentOptionName}</div>
       <div>
         <Link
           className="text-lg hover:underline"
