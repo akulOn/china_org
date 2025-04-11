@@ -1,9 +1,10 @@
 import {
-  Button,
   FormControl,
   Input,
   InputAdornment,
   InputLabel,
+  Paper,
+  TextField,
 } from "@mui/material";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import SearchIcon from "@mui/icons-material/Search";
@@ -65,10 +66,64 @@ function RouteComponent() {
   const { itemId } = Route.useParams();
 
   return (
-    <div className="flex justify-center gap-5 p-2">
-      <div className="flex flex-col gap-2">
-        <Button id="basic-button">Type</Button>
-      </div>
+    <div className="flex justify-center gap-4 p-2">
+      <FormControl className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
+          <Paper className="p-2">
+            <span className="text-lg">MOQ</span>
+            <div className="flex gap-1">
+              <TextField
+                className="w-20"
+                label="Min"
+                type="number"
+                size="small"
+              />
+              <TextField
+                className="w-20"
+                label="Max"
+                type="number"
+                size="small"
+              />
+            </div>
+          </Paper>
+
+          <Paper className="p-2">
+            <span className="text-lg">Price</span>
+            <div className="flex gap-1">
+              <TextField
+                className="w-20"
+                label="Min"
+                type="number"
+                size="small"
+              />
+              <TextField
+                className="w-20"
+                label="Max"
+                type="number"
+                size="small"
+              />
+            </div>
+          </Paper>
+
+          <Paper className="p-2">
+            <span className="text-lg">Weight</span>
+            <div className="flex gap-1">
+              <TextField
+                className="w-20"
+                label="Min"
+                type="number"
+                size="small"
+              />
+              <TextField
+                className="w-20"
+                label="Max"
+                type="number"
+                size="small"
+              />
+            </div>
+          </Paper>
+        </div>
+      </FormControl>
       <div className="flex flex-col gap-2">
         <FormControl variant="standard">
           <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
