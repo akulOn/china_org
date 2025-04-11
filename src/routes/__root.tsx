@@ -1,10 +1,5 @@
 import { Button, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import {
-  createRootRoute,
-  Link,
-  Outlet,
-  useRouterState,
-} from "@tanstack/react-router";
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useState } from "react";
 
