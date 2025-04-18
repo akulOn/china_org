@@ -1,9 +1,9 @@
-import { Button, Container, Typography } from "@mui/material";
-import Image from "mui-image";
 import { useState } from "react";
+import { Button, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link } from "@tanstack/react-router";
+import Image from "mui-image";
 
 type ImageCarouselType = {
   route: string;
