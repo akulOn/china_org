@@ -203,7 +203,7 @@ function RouteComponent() {
       setSelectedCategories([...selectedCategories.filter((x) => x.id !== id)]);
     else setSelectedCategories([...selectedCategories, selectedCategory]);
 
-    handleClose();
+    handleCloseMenu();
   };
 
   const handleDelete = (id: number) => {
