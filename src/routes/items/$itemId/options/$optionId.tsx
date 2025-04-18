@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import Image from "mui-image";
 
@@ -18,22 +18,47 @@ function RouteComponent() {
   const { itemId } = useParams({ strict: false });
 
   return (
-    <div className="flex gap-2">
-      <div>{option.name}</div>
-      <div>
-        <Link
-          className="text-lg hover:underline"
-          to={"/items/$itemId"}
-          params={{ itemId: String(itemId) }}
-        >
-          Go Back
-        </Link>
-        <Image src={option.image} alt={option.name} />
-      </div>
-      <div className="flex flex-col gap-1">
-        <span className="text-2xl">{option.name}</span>
-        <Paper className="h-full w-1/2">{option.description}</Paper>
-      </div>
-    </div>
+    <Container className="flex flex-col gap-2">
+      <Link
+        className="text-lg hover:underline"
+        to={"/items/$itemId"}
+        params={{ itemId: String(itemId) }}
+      >
+        Go Back
+      </Link>
+      <Typography variant="h5">{option.name}</Typography>
+
+      <Image src={option.image} alt={option.name} />
+
+      <Paper>
+        <Typography>
+          <span>MOQ</span>
+          <span>2000</span>
+        </Typography>
+
+        <Typography>
+          <span>MOQ</span>
+          <span>MOQ</span>
+        </Typography>
+        <Typography>
+          <span>MOQ</span>
+          <span>MOQ</span>
+        </Typography>
+        <Typography>
+          <span>MOQ</span>
+          <span>MOQ</span>
+        </Typography>
+        <Typography>
+          <span>MOQ</span>
+          <span>MOQ</span>
+        </Typography>
+        <Typography>
+          <span>MOQ</span>
+          <span>MOQ</span>
+        </Typography>
+        <Typography>Desc</Typography>
+        <Typography>{option.description}</Typography>
+      </Paper>
+    </Container>
   );
 }
