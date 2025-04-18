@@ -2,6 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Button,
   Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   Input,
   InputAdornment,
@@ -164,6 +169,7 @@ const categories: CategoryType[] = [
 ];
 
 function RouteComponent() {
+  const [formVisible, setFormVisible] = useState(false);
   const [displayedItems, setDisplayedItems] = useState<ItemType[]>([...items]);
   const [selectedCategories, setSelectedCategories] = useState<CategoryType[]>(
     []
@@ -172,11 +178,19 @@ function RouteComponent() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenForm = () => {
+    setFormVisible(true);
+  };
+
+  const handleCloseForm = () => {
+    setFormVisible(false);
+  };
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
@@ -213,11 +227,35 @@ function RouteComponent() {
     <div className="flex justify-center gap-4 p-2">
       <div className="flex flex-col gap-2">
         <Button
-          id="basic-button"
+          variant="outlined"
+          id="categories-button"
+          onClick={handleOpenForm}
+        >
+          Add item
+        </Button>
+        <Dialog open={formVisible} onClose={handleCloseForm}>
+          <DialogTitle id="add-item-dialog-title">Add item</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Add a new item that will be later used for options
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color="warning" onClick={handleCloseForm}>
+              Close
+            </Button>
+            <Button color="primary" onClick={handleCloseForm} autoFocus>
+              Add
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Button
+          id="categories-button"
+          variant="outlined"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
+          onClick={handleOpenMenu}
         >
           Categories
         </Button>
@@ -225,7 +263,7 @@ function RouteComponent() {
           id="basic-menu"
           anchorEl={anchorEl}
           open={open}
-          onClose={handleClose}
+          onClose={handleCloseMenu}
           aria-labelledby="basic-button"
         >
           {categories.map((category) => (
@@ -284,7 +322,6 @@ function RouteComponent() {
               hover:cursor-pointer"
               to={`/items/$itemId`}
               params={{ itemId: String(item.id) }}
-              state={{ currentOptionName: item.name }}
             >
               {item.name}
             </Link>
