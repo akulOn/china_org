@@ -15,7 +15,7 @@ const option = {
   name: "2-Slice Pop-Up Toaster",
   description:
     "Compact toaster with adjustable browning settings and a crumb tray.",
-  image: "https://source.unsplash.com/featured/?toaster",
+  image: "https://picsum.photos/id/1/200",
 };
 
 function RouteComponent() {
@@ -38,8 +38,8 @@ function RouteComponent() {
         <img
           className="w-200 h-200 object-contain"
           loading="lazy"
-          srcSet="/images/man-toasting-bread-breakfast-drinking-coffee.jpg"
-          src="/images/man-toasting-bread-breakfast-drinking-coffee.jpg"
+          srcSet={option.image}
+          src={option.image}
           alt={option.name}
         />
       </div>

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import {
+  Container,
   FormControl,
   Input,
   InputAdornment,
@@ -6,20 +8,20 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import ImageCarousel from "../../../components/ImageCarousel";
 
 export const Route = createFileRoute("/items/$itemId/")({
   component: RouteComponent,
 });
 
-interface OptionType {
+export type OptionType = {
   id: number;
   name: string;
   description: string;
-  image: string;
-}
+  images: string[];
+};
 
 const options: OptionType[] = [
   {
@@ -27,35 +29,60 @@ const options: OptionType[] = [
     name: "2-Slice Pop-Up Toaster",
     description:
       "Compact toaster with adjustable browning settings and a crumb tray.",
-    image: "https://source.unsplash.com/featured/?toaster",
+    images: [
+      "https://picsum.photos/id/1/200",
+      "https://picsum.photos/id/2/200",
+      "https://picsum.photos/id/3/200",
+      "https://picsum.photos/id/4/200",
+    ],
   },
   {
     id: 1002,
     name: "4-Slice Stainless Steel Toaster",
     description:
       "A family-sized toaster with extra-wide slots and a sleek brushed steel finish.",
-    image: "https://source.unsplash.com/featured/?kitchen,toaster",
+    images: [
+      "https://picsum.photos/id/1/200",
+      "https://picsum.photos/id/2/200",
+      "https://picsum.photos/id/3/200",
+      "https://picsum.photos/id/4/200",
+    ],
   },
   {
     id: 1003,
     name: "Countertop Convection Oven",
     description:
       "Versatile mini oven with convection cooking, ideal for baking and roasting.",
-    image: "https://source.unsplash.com/featured/?countertop,oven",
+    images: [
+      "https://picsum.photos/id/1/200",
+      "https://picsum.photos/id/2/200",
+      "https://picsum.photos/id/3/200",
+      "https://picsum.photos/id/4/200",
+    ],
   },
   {
     id: 1004,
     name: "Air Fryer Toaster Oven Combo",
     description:
       "All-in-one appliance for air frying, baking, and toasting with digital controls.",
-    image: "https://source.unsplash.com/featured/?airfryer,oven",
+    images: [
+      "https://picsum.photos/id/1/200",
+      "https://picsum.photos/id/2/200",
+      "https://picsum.photos/id/3/200",
+      "https://picsum.photos/id/4/200",
+    ],
   },
   {
     id: 1005,
     name: "Retro 2-Slice Toaster",
     description:
       "Stylish retro design with modern features like defrost and reheat modes.",
-    image: "https://source.unsplash.com/featured/?retro,toaster",
+    images: [
+      "https://picsum.photos/id/1/200",
+      "https://picsum.photos/id/2/200",
+      "https://picsum.photos/id/3/200",
+      "https://picsum.photos/id/4/200",
+    ],
   },
 ];
 
@@ -66,9 +93,9 @@ function RouteComponent() {
   const { itemId } = Route.useParams();
 
   return (
-    <div className="flex justify-center gap-4 p-2">
+    <Container className="flex justify-center gap-2 my-1">
       <FormControl className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2">
+        <Container className="flex flex-col gap-2">
           <Paper className="p-2">
             <span className="text-lg">MOQ</span>
             <div className="flex gap-1">
@@ -122,9 +149,9 @@ function RouteComponent() {
               />
             </div>
           </Paper>
-        </div>
+        </Container>
       </FormControl>
-      <div className="flex flex-col gap-2">
+      <Container className="flex flex-col gap-2">
         <FormControl variant="standard">
           <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
           <Input
@@ -147,23 +174,26 @@ function RouteComponent() {
             }}
           />
         </FormControl>
-        <div className="grid grid-cols-3 gap-4">
+        <Container
+          className="
+            grid
+            grid-cols-1 lg:grid-cols-3
+            gap-2"
+        >
           {displayedOptions.map((option) => (
-            <Link
+            <ImageCarousel
               key={option.id}
-              className="
-              flex items-center justify-center
-              w-50 h-50
-              border border-gray-400 bg-amber-50
-              hover:cursor-pointer"
-              to={`/items/$itemId/options/$optionId`}
-              params={{ itemId: String(itemId), optionId: String(option.id) }}
-            >
-              {option.name}
-            </Link>
+              route="/items/$itemId/options/$optionId"
+              routeParams={{
+                itemId: String(itemId),
+                optionId: String(option.id),
+              }}
+              header={option.name}
+              images={option.images}
+            />
           ))}
-        </div>
-      </div>
-    </div>
+        </Container>
+      </Container>
+    </Container>
   );
 }
