@@ -51,7 +51,7 @@ export default function ImageCarousel({
           {header}
         </Typography>
 
-        <Image className="z-0 rounded-sm" src={currentImage} />
+        <Image className="z-0 rounded-sm" src={currentImage} showLoading />
       </Link>
       <Button
         className="!absolute inset-y-0 left-0 z-10"
