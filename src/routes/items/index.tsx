@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   Input,
@@ -14,9 +13,11 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Check from "@mui/icons-material/Check";
+import { Formik, Form, Field } from "formik";
 
 import { useEffect, useState } from "react";
 
@@ -169,11 +170,12 @@ const categories: CategoryType[] = [
 ];
 
 function RouteComponent() {
-  const [formVisible, setFormVisible] = useState(false);
   const [displayedItems, setDisplayedItems] = useState<ItemType[]>([...items]);
   const [selectedCategories, setSelectedCategories] = useState<CategoryType[]>(
     []
   );
+
+  const [formVisible, setFormVisible] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -223,6 +225,10 @@ function RouteComponent() {
     ]);
   }, [selectedCategories]);
 
+  useEffect(() => {
+    setDisplayedItems([...items]);
+  }, [items.length]);
+
   return (
     <div className="flex justify-center gap-4 p-2">
       <div className="flex flex-col gap-2">
@@ -234,20 +240,61 @@ function RouteComponent() {
           Add item
         </Button>
         <Dialog open={formVisible} onClose={handleCloseForm}>
-          <DialogTitle id="add-item-dialog-title">Add item</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Add a new item that will be later used for options
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="warning" onClick={handleCloseForm}>
-              Close
-            </Button>
-            <Button color="primary" onClick={handleCloseForm} autoFocus>
-              Add
-            </Button>
-          </DialogActions>
+          <Formik
+            initialValues={{} as ItemType}
+            onSubmit={(values, { setSubmitting }) => {
+              console.log(values);
+
+              items.push({
+                ...values,
+                id: Math.max(...items.map((x) => x.id)) + 1,
+              });
+
+              setSubmitting(false);
+              handleCloseForm();
+            }}
+          >
+            {({ submitForm, isSubmitting }) => (
+              <Form>
+                <DialogTitle id="add-item-dialog-title">Add item</DialogTitle>
+                <DialogContent className="flex flex-col gap-2">
+                  <Typography>
+                    Add a new item that will be later used for options
+                  </Typography>
+
+                  <Field
+                    className="border-1"
+                    name="name"
+                    type="name"
+                    label="name"
+                  />
+                  <Field
+                    className="border-1"
+                    type="description"
+                    label="description"
+                    name="description"
+                  />
+                  <Field name="categoryId" component="select">
+                    {categories.map((category) => (
+                      <option value={category.id}>{category.name}</option>
+                    ))}
+                  </Field>
+                </DialogContent>
+                <DialogActions>
+                  <Button color="warning" onClick={handleCloseForm}>
+                    Close
+                  </Button>
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
+                    onClick={submitForm}
+                  >
+                    Add
+                  </Button>
+                </DialogActions>
+              </Form>
+            )}
+          </Formik>
         </Dialog>
         <Button
           id="categories-button"

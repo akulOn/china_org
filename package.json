@@ -23,6 +23,7 @@
     "@tanstack/react-query-devtools": "^5.69.0",
     "@tanstack/react-router": "^1.114.27",
     "@types/mui-image": "^1.0.5",
+    "formik": "^2.4.6",
     "mui-image": "^1.0.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
