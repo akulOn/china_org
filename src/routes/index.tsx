@@ -10,7 +10,7 @@ function Index() {
     <Container className="flex flex-col gap-2 items-center h-full">
       <span className="text-6xl">Welcome. Pick.</span>
       <Container
-        className="flex flex-col gap-2 justify-center items-stretch h-full
+        className="flex flex-col grow-1 gap-2 justify-center items-stretch
           lg:flex-row lg:items-center lg:*:w-64
           *:flex *:justify-center *:items-center
           *:bg-amber-50 *:border
