@@ -1,6 +1,7 @@
 import { Button, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import Image from "mui-image";
 import { useState } from "react";
 
 interface CountryType {
@@ -35,15 +36,14 @@ export const Route = createRootRoute({
     };
 
     return (
-      <div className="flex flex-col h-dvh bg-[#6C6D74]">
+      <div
+        className="flex flex-col h-dvh
+          bg-brand-background text-brand-text"
+      >
         <div
           className="
             flex flex-none gap-2 justify-between
-            py-3
-            px-8
-            bg-[#262E36]
-            text-[#D3D1CE]
-            *:
+            py-3 px-8
             [&_a]:hover:underline"
         >
           <Link to="/" className="text-4xl [&.active]:font-bold">
@@ -61,17 +61,14 @@ export const Route = createRootRoute({
             </Link>
           </div>
           <Button
-            className="text-2xl"
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
             variant="outlined"
             startIcon={
-              <img
-                loading="lazy"
+              <Image
                 width="20"
-                srcSet={`https://flagcdn.com/w40/${selectedCountry.code.toLowerCase()}.png 2x`}
                 src={`https://flagcdn.com/w20/${selectedCountry.code.toLowerCase()}.png`}
                 alt=""
               />
@@ -102,7 +99,7 @@ export const Route = createRootRoute({
           </Menu>
         </div>
         <hr />
-        <div className="flex-1 p-1 bg-[#262E36]">
+        <div className="flex-1 p-1">
           <Outlet />
         </div>
         <TanStackRouterDevtools />

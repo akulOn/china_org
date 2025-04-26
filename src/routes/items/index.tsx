@@ -365,7 +365,8 @@ function RouteComponent() {
               className="
               flex items-center justify-center
               w-50 h-50
-              border border-gray-400 bg-amber-50
+            bg-brand-secondary
+              shadow-lg rounded-2xl
               hover:cursor-pointer"
               to={`/items/$itemId`}
               params={{ itemId: String(item.id) }}

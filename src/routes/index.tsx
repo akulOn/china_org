@@ -45,11 +45,12 @@ function Index() {
         Welcome!
       </Typography>
       <Container
-        className="flex flex-col grow-2 gap-8 justify-center items-stretch
+        className="
+          flex flex-col grow-2 gap-8 justify-center items-stretch
           lg:flex-row lg:*:w-64
           *:h-48
-          *:bg-[#6C6D74] *:shadow-lg *:rounded-4xl
-          text-[#D3D1CE]"
+          *:bg-brand-secondary *:shadow-lg *:rounded-4xl
+          text-brand-text"
       >
         {links.map((link) => (
           <Link

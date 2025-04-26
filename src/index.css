@@ -3,3 +3,9 @@
 @import '@fontsource/roboto/400.css';
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/700.css';
+
+@theme {
+    --color-brand-background: #262E36;
+    --color-brand-secondary: #6C6D74;
+    --color-brand-text: #D3D1CE;
+}
