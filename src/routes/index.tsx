@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Container } from "@mui/material";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -7,11 +7,15 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <Box className="flex flex-col gap-2 items-center">
-      <span className="text-5xl">Welcome. Pick.</span>
-      <Box
-        className="flex flex-row gap-2 
-          *:w-30 *:h-30 *:bg-amber-50 *:border *:rounded-xs *:flex *:justify-center *:items-center *:text-lg"
+    <Container className="flex flex-col gap-2 items-center h-full">
+      <span className="text-6xl">Welcome. Pick.</span>
+      <Container
+        className="flex flex-col gap-2 justify-center items-stretch h-full
+          lg:flex-row lg:items-center lg:*:w-64
+          *:flex *:justify-center *:items-center
+          *:bg-amber-50 *:border
+          *:h-64
+          *:text-6xl"
       >
         <Link to={"/items"}>
           <span>Items</span>
@@ -22,7 +26,7 @@ function Index() {
         <Link to={"/sellers"}>
           <span>Sellers</span>
         </Link>
-      </Box>
-    </Box>
+      </Container>
+    </Container>
   );
 }
