@@ -35,12 +35,21 @@ export const Route = createRootRoute({
     };
 
     return (
-      <div className="flex flex-col h-dvh bg-neutral-100">
-        <div className="flex flex-none gap-2 p-2 justify-between *:text-2xl [&_a]:hover:underline">
-          <Link to="/" className="[&.active]:font-bold">
+      <div className="flex flex-col h-dvh bg-[#6C6D74]">
+        <div
+          className="
+            flex flex-none gap-2 justify-between
+            py-3
+            px-8
+            bg-[#262E36]
+            text-[#D3D1CE]
+            *:
+            [&_a]:hover:underline"
+        >
+          <Link to="/" className="text-4xl [&.active]:font-bold">
             Home
           </Link>
-          <div className="flex gap-2">
+          <div className="flex items-end gap-8 text-xl">
             <Link to="/items" className="[&.active]:font-bold">
               Items
             </Link>
@@ -52,6 +61,7 @@ export const Route = createRootRoute({
             </Link>
           </div>
           <Button
+            className="text-2xl"
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -92,7 +102,7 @@ export const Route = createRootRoute({
           </Menu>
         </div>
         <hr />
-        <div className="flex-1 p-1 bg-neutral-100">
+        <div className="flex-1 p-1 bg-[#262E36]">
           <Outlet />
         </div>
         <TanStackRouterDevtools />
