@@ -374,7 +374,11 @@ function RouteComponent() {
             />
           ))}
         </div>
-        <Container className="grid grid-cols-3 gap-4">
+        <Container
+          className="
+            grid gap-4
+            grid-cols-1 lg:grid-cols-3"
+        >
           {displayedItems.map((item) => (
             <Link
               key={item.id}
