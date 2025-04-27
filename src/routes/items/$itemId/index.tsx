@@ -93,87 +93,83 @@ function RouteComponent() {
   const { itemId } = Route.useParams();
 
   return (
-    <Container className="flex justify-center gap-2 my-1">
-      <FormControl className="flex flex-col gap-2">
-        <Container className="flex flex-col gap-2">
-          <Paper className="p-2">
-            <span className="text-lg">MOQ</span>
-            <div className="flex gap-1">
-              <TextField
-                className="w-20"
-                label="Min"
-                type="number"
-                size="small"
-              />
-              <TextField
-                className="w-20"
-                label="Max"
-                type="number"
-                size="small"
-              />
-            </div>
-          </Paper>
-
-          <Paper className="p-2">
-            <span className="text-lg">Price</span>
-            <div className="flex gap-1">
-              <TextField
-                className="w-20"
-                label="Min"
-                type="number"
-                size="small"
-              />
-              <TextField
-                className="w-20"
-                label="Max"
-                type="number"
-                size="small"
-              />
-            </div>
-          </Paper>
-
-          <Paper className="p-2">
-            <span className="text-lg">Weight</span>
-            <div className="flex gap-1">
-              <TextField
-                className="w-20"
-                label="Min"
-                type="number"
-                size="small"
-              />
-              <TextField
-                className="w-20"
-                label="Max"
-                type="number"
-                size="small"
-              />
-            </div>
-          </Paper>
-        </Container>
-      </FormControl>
+    <Container className="flex justify-center gap-2">
       <Container className="flex flex-col gap-2">
-        <FormControl variant="standard">
-          <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setDisplayedOptions(
-                ...[
-                  options.filter((option) =>
-                    option.name
-                      .toLowerCase()
-                      .includes(event.target.value.toLowerCase())
-                  ),
-                ]
-              );
-            }}
-          />
-        </FormControl>
+        <Paper className="p-2">
+          <span className="text-lg">MOQ</span>
+          <div className="flex gap-1">
+            <TextField
+              className="w-20"
+              label="Min"
+              type="number"
+              size="small"
+            />
+            <TextField
+              className="w-20"
+              label="Max"
+              type="number"
+              size="small"
+            />
+          </div>
+        </Paper>
+
+        <Paper className="p-2">
+          <span className="text-lg">Price</span>
+          <div className="flex gap-1">
+            <TextField
+              className="w-20"
+              label="Min"
+              type="number"
+              size="small"
+            />
+            <TextField
+              className="w-20"
+              label="Max"
+              type="number"
+              size="small"
+            />
+          </div>
+        </Paper>
+
+        <Paper className="p-2">
+          <span className="text-lg">Weight</span>
+          <div className="flex gap-1">
+            <TextField
+              className="w-20"
+              label="Min"
+              type="number"
+              size="small"
+            />
+            <TextField
+              className="w-20"
+              label="Max"
+              type="number"
+              size="small"
+            />
+          </div>
+        </Paper>
+      </Container>
+      <Container className="flex flex-col gap-2">
+        <InputLabel htmlFor="input-with-icon-adornment">Find option</InputLabel>
+        <Input
+          id="input-with-icon-adornment"
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setDisplayedOptions(
+              ...[
+                options.filter((option) =>
+                  option.name
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
+                ),
+              ]
+            );
+          }}
+        />
         <Container
           className="
             grid

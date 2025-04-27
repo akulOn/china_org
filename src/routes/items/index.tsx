@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Button,
   Chip,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -232,11 +233,7 @@ function RouteComponent() {
   return (
     <div className="flex justify-center gap-4 p-2">
       <div className="flex flex-col gap-2">
-        <Button
-          variant="outlined"
-          id="categories-button"
-          onClick={handleOpenForm}
-        >
+        <Button variant="outlined" onClick={handleOpenForm}>
           Add item
         </Button>
         <Dialog open={formVisible} onClose={handleCloseForm}>
@@ -297,7 +294,6 @@ function RouteComponent() {
           </Formik>
         </Dialog>
         <Button
-          id="categories-button"
           variant="outlined"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
@@ -306,13 +302,7 @@ function RouteComponent() {
         >
           Categories
         </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleCloseMenu}
-          aria-labelledby="basic-button"
-        >
+        <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
           {categories.map((category) => (
             <MenuItem
               key={category.id}
@@ -336,29 +326,27 @@ function RouteComponent() {
         ))}
       </div>
       <div className="flex flex-col gap-2">
-        <FormControl variant="standard">
-          <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setDisplayedItems(
-                ...[
-                  items.filter((item) =>
-                    item.name
-                      .toLowerCase()
-                      .includes(event.target.value.toLowerCase())
-                  ),
-                ]
-              );
-            }}
-          />
-        </FormControl>
-        <div className="grid grid-cols-3 gap-4">
+        <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
+        <Input
+          id="input-with-icon-adornment"
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setDisplayedItems(
+              ...[
+                items.filter((item) =>
+                  item.name
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
+                ),
+              ]
+            );
+          }}
+        />
+        <Container className="grid grid-cols-3 gap-4">
           {displayedItems.map((item) => (
             <Link
               key={item.id}
@@ -374,7 +362,7 @@ function RouteComponent() {
               {item.name}
             </Link>
           ))}
-        </div>
+        </Container>
       </div>
     </div>
   );

@@ -48,9 +48,7 @@ function Index() {
         className="
           flex flex-col grow-2 gap-8 justify-center items-stretch
           lg:flex-row lg:*:w-64
-          *:h-48
-          *:bg-brand-secondary *:shadow-lg *:rounded-4xl
-          text-brand-text"
+          *:h-48 *:shadow-lg *:rounded-4xl *:bg-brand-secondary"
       >
         {links.map((link) => (
           <Link

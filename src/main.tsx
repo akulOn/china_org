@@ -22,17 +22,47 @@ declare module "@tanstack/react-router" {
   }
 }
 
+import { ThemeProvider, createTheme, ThemeOptions } from "@mui/material/styles";
+
+export const themeOptions: ThemeOptions = {
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#6c6d74",
+      light: "#898A8F",
+      dark: "#4B4C51",
+    },
+    secondary: {
+      main: "#e5a657",
+      light: "#EAB778",
+      dark: "#A0743C",
+    },
+    background: {
+      default: "#262e36",
+      paper: "#262e36",
+    },
+    text: {
+      primary: "#d3d1ce",
+      secondary: "#b3b7ba",
+    },
+  },
+};
+
+const theme = createTheme(themeOptions);
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider basepath={import.meta.env.BASE_URL} router={router} />
-      </QueryClientProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider basepath={import.meta.env.BASE_URL} router={router} />
+        </QueryClientProvider>
+      </ThemeProvider>
     </StrictMode>
   );
 }

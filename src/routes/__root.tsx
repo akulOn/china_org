@@ -36,10 +36,7 @@ export const Route = createRootRoute({
     };
 
     return (
-      <div
-        className="flex flex-col h-dvh
-          bg-brand-background text-brand-text"
-      >
+      <div className="flex flex-col h-dvh">
         <div
           className="
             flex flex-none gap-2 justify-between
