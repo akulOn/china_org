@@ -325,7 +325,7 @@ function RouteComponent() {
           />
         ))}
       </div>
-      <div className="flex flex-col gap-2">
+      <Container className="flex flex-col gap-2">
         <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
         <Input
           id="input-with-icon-adornment"
@@ -352,7 +352,7 @@ function RouteComponent() {
               key={item.id}
               className="
               flex items-center justify-center
-              w-50 h-50
+              h-50
             bg-brand-secondary
               shadow-lg rounded-2xl
               hover:cursor-pointer"
@@ -363,7 +363,7 @@ function RouteComponent() {
             </Link>
           ))}
         </Container>
-      </div>
+      </Container>
     </Container>
   );
 }
