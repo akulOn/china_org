@@ -1,16 +1,21 @@
 import { useState } from "react";
 import {
+  Button,
   Container,
-  FormControl,
   Input,
   InputAdornment,
   InputLabel,
-  Paper,
-  TextField,
+  Typography,
 } from "@mui/material";
+
 import { createFileRoute } from "@tanstack/react-router";
+import { Formik, Form } from "formik";
+
+import * as yup from "yup";
+
 import SearchIcon from "@mui/icons-material/Search";
 import ImageCarousel from "../../../components/ImageCarousel";
+import { MuiField } from "../../../components/MuiField";
 
 export const Route = createFileRoute("/items/$itemId/")({
   component: RouteComponent,
@@ -19,6 +24,9 @@ export const Route = createFileRoute("/items/$itemId/")({
 export type OptionType = {
   id: number;
   name: string;
+  moq: number;
+  price: number;
+  weight: number;
   description: string;
   images: string[];
 };
@@ -27,6 +35,9 @@ const options: OptionType[] = [
   {
     id: 1001,
     name: "2-Slice Pop-Up Toaster",
+    moq: 1000,
+    price: 100,
+    weight: 10,
     description:
       "Compact toaster with adjustable browning settings and a crumb tray.",
     images: [
@@ -39,6 +50,9 @@ const options: OptionType[] = [
   {
     id: 1002,
     name: "4-Slice Stainless Steel Toaster",
+    moq: 100,
+    price: 10,
+    weight: 1,
     description:
       "A family-sized toaster with extra-wide slots and a sleek brushed steel finish.",
     images: [
@@ -51,6 +65,9 @@ const options: OptionType[] = [
   {
     id: 1003,
     name: "Countertop Convection Oven",
+    moq: 2000,
+    price: 100,
+    weight: 10,
     description:
       "Versatile mini oven with convection cooking, ideal for baking and roasting.",
     images: [
@@ -63,6 +80,9 @@ const options: OptionType[] = [
   {
     id: 1004,
     name: "Air Fryer Toaster Oven Combo",
+    moq: 3000,
+    price: 200,
+    weight: 15,
     description:
       "All-in-one appliance for air frying, baking, and toasting with digital controls.",
     images: [
@@ -75,6 +95,9 @@ const options: OptionType[] = [
   {
     id: 1005,
     name: "Retro 2-Slice Toaster",
+    moq: 2000,
+    price: 200,
+    weight: 20,
     description:
       "Stylish retro design with modern features like defrost and reheat modes.",
     images: [
@@ -86,6 +109,45 @@ const options: OptionType[] = [
   },
 ];
 
+const filterOptionsSchema = yup.object().shape({
+  minMoq: yup.number().min(0, "Must be greater then 0"),
+  maxMoq: yup.number().min(0, "Must be greater then 0").nullable(),
+  minPrice: yup.number().min(0, "Must be greater then 0"),
+  maxPrice: yup.number().min(0, "Must be greater then 0").nullable(),
+  minWeight: yup.number().min(0, "Must be greater then 0"),
+  maxWeight: yup.number().min(0, "Must be greater then 0").nullable(),
+});
+
+const filterFields: {
+  name: keyof yup.InferType<typeof filterOptionsSchema>;
+  label: string;
+}[] = [
+  {
+    name: "minMoq",
+    label: "Min Moq",
+  },
+  {
+    name: "maxMoq",
+    label: "Max Moq",
+  },
+  {
+    name: "minPrice",
+    label: "Min Price",
+  },
+  {
+    name: "maxPrice",
+    label: "Max Price",
+  },
+  {
+    name: "minWeight",
+    label: "Min Weight",
+  },
+  {
+    name: "maxWeight",
+    label: "Max Weight",
+  },
+];
+
 function RouteComponent() {
   const [displayedOptions, setDisplayedOptions] = useState<OptionType[]>([
     ...options,
@@ -94,61 +156,45 @@ function RouteComponent() {
 
   return (
     <Container className="flex justify-center gap-2">
-      <Container className="flex flex-col gap-2">
-        <Paper className="p-2">
-          <span className="text-lg">MOQ</span>
-          <div className="flex gap-1">
-            <TextField
-              className="w-20"
-              label="Min"
-              type="number"
-              size="small"
-            />
-            <TextField
-              className="w-20"
-              label="Max"
-              type="number"
-              size="small"
-            />
-          </div>
-        </Paper>
+      <div className="flex flex-col gap-2">
+        <Formik
+          initialValues={
+            {
+              minMoq: 0,
+              maxMoq: null,
+              minPrice: 0,
+              maxPrice: null,
+              minWeight: 0,
+              maxWeight: null,
+            } as yup.InferType<typeof filterOptionsSchema>
+          }
+          validationSchema={filterOptionsSchema}
+          onSubmit={({ minMoq }) => {
+            if (minMoq !== undefined)
+              setDisplayedOptions(options.filter((x) => x.moq >= minMoq));
+          }}
+        >
+          {({ values, handleChange, handleBlur }) => (
+            <Form className="flex flex-col gap-4">
+              <Typography variant="h6">Filter:</Typography>
 
-        <Paper className="p-2">
-          <span className="text-lg">Price</span>
-          <div className="flex gap-1">
-            <TextField
-              className="w-20"
-              label="Min"
-              type="number"
-              size="small"
-            />
-            <TextField
-              className="w-20"
-              label="Max"
-              type="number"
-              size="small"
-            />
-          </div>
-        </Paper>
+              {filterFields.map((x) => (
+                <MuiField
+                  key={x.name}
+                  name={x.name}
+                  label={x.label}
+                  type="number"
+                  value={values[x.name] === null ? "" : values[x.name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              ))}
 
-        <Paper className="p-2">
-          <span className="text-lg">Weight</span>
-          <div className="flex gap-1">
-            <TextField
-              className="w-20"
-              label="Min"
-              type="number"
-              size="small"
-            />
-            <TextField
-              className="w-20"
-              label="Max"
-              type="number"
-              size="small"
-            />
-          </div>
-        </Paper>
-      </Container>
+              <Button type="submit">Find</Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
       <Container className="flex flex-col gap-2">
         <InputLabel htmlFor="input-with-icon-adornment">Find option</InputLabel>
         <Input
