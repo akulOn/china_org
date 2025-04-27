@@ -231,7 +231,7 @@ function RouteComponent() {
   }, [items.length]);
 
   return (
-    <div className="flex justify-center gap-4 p-2">
+    <Container className="flex justify-center gap-4 p-2">
       <div className="flex flex-col gap-2">
         <Button variant="outlined" onClick={handleOpenForm}>
           Add item
@@ -364,6 +364,6 @@ function RouteComponent() {
           ))}
         </Container>
       </div>
-    </div>
+    </Container>
   );
 }
