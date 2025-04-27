@@ -14,6 +14,8 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,6 +23,7 @@ import Check from "@mui/icons-material/Check";
 import { Formik, Form, Field } from "formik";
 
 import { useEffect, useState } from "react";
+import { MuiField } from "../../components/MuiField";
 
 export const Route = createFileRoute("/items/")({
   component: RouteComponent,
@@ -29,7 +32,7 @@ export const Route = createFileRoute("/items/")({
 interface ItemType {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   categoryId: number;
 }
 
@@ -231,109 +234,12 @@ function RouteComponent() {
   }, [items.length]);
 
   return (
-    <Container className="flex justify-center gap-4 p-2">
-      <div className="flex flex-col gap-2">
-        <Button variant="outlined" onClick={handleOpenForm}>
-          Add item
-        </Button>
-        <Dialog open={formVisible} onClose={handleCloseForm}>
-          <Formik
-            initialValues={{} as ItemType}
-            onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
-
-              items.push({
-                ...values,
-                id: Math.max(...items.map((x) => x.id)) + 1,
-              });
-
-              setSubmitting(false);
-              handleCloseForm();
-            }}
-          >
-            {({ submitForm, isSubmitting }) => (
-              <Form>
-                <DialogTitle id="add-item-dialog-title">Add item</DialogTitle>
-                <DialogContent className="flex flex-col gap-2">
-                  <Typography>
-                    Add a new item that will be later used for options
-                  </Typography>
-
-                  <Field
-                    className="border-1"
-                    name="name"
-                    type="name"
-                    label="name"
-                  />
-                  <Field
-                    className="border-1"
-                    type="description"
-                    label="description"
-                    name="description"
-                  />
-                  <Field name="categoryId" component="select">
-                    {categories.map((category) => (
-                      <option value={category.id}>{category.name}</option>
-                    ))}
-                  </Field>
-                </DialogContent>
-                <DialogActions>
-                  <Button color="warning" onClick={handleCloseForm}>
-                    Close
-                  </Button>
-                  <Button
-                    color="primary"
-                    disabled={isSubmitting}
-                    onClick={submitForm}
-                  >
-                    Add
-                  </Button>
-                </DialogActions>
-              </Form>
-            )}
-          </Formik>
-        </Dialog>
-        <Button
-          variant="outlined"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleOpenMenu}
-        >
-          Categories
-        </Button>
-        <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
-          {categories.map((category) => (
-            <MenuItem
-              key={category.id}
-              onClick={() => handleMenuItemOnClick(category.id)}
-            >
-              {selectedCategories.some((x) => x.id === category.id) && (
-                <ListItemIcon>
-                  <Check />
-                </ListItemIcon>
-              )}
-              {category.name}
-            </MenuItem>
-          ))}
-        </Menu>
-        {selectedCategories.map((selectedCategory) => (
-          <Chip
-            key={selectedCategory.id}
-            label={selectedCategory.name}
-            onDelete={() => handleDelete(selectedCategory.id)}
-          />
-        ))}
-      </div>
-      <Container className="flex flex-col gap-2">
-        <InputLabel htmlFor="input-with-icon-adornment">Find item</InputLabel>
-        <Input
-          id="input-with-icon-adornment"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          }
+    <Container className="flex flex-col justify-center gap-4 p-2">
+      <div className="flex justify-center items-end gap-1">
+        <SearchIcon />
+        <TextField
+          label="Find item"
+          variant="standard"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setDisplayedItems(
               ...[
@@ -346,6 +252,127 @@ function RouteComponent() {
             );
           }}
         />
+      </div>
+      <Container className="flex gap-2">
+        <div className="flex flex-col gap-4">
+          <Button variant="outlined" onClick={handleOpenForm}>
+            Add item
+          </Button>
+          <Dialog open={formVisible} onClose={handleCloseForm}>
+            <Formik
+              initialValues={{} as ItemType}
+              onSubmit={(values, { setSubmitting }) => {
+                console.log(values);
+
+                items.push({
+                  ...values,
+                  id: Math.max(...items.map((x) => x.id)) + 1,
+                });
+
+                setSubmitting(false);
+                handleCloseForm();
+              }}
+            >
+              {({
+                values,
+                submitForm,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+              }) => (
+                <Form>
+                  <DialogTitle id="add-item-dialog-title">Add item</DialogTitle>
+                  <DialogContent className="flex flex-col gap-2">
+                    <Typography>
+                      Add a new item that will be later used for options
+                    </Typography>
+
+                    <MuiField
+                      label="Name"
+                      type="text"
+                      value={values.name ?? ""}
+                      name="name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+
+                    <MuiField
+                      label="Description"
+                      type="text"
+                      value={values.description ?? ""}
+                      name="description"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+
+                    <Field name="categoryId">
+                      {({
+                        form: { setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                      }) => (
+                        <Select
+                          name="categoryId"
+                          value={values.categoryId ?? ""}
+                          onChange={(event) =>
+                            setFieldValue("categoryId", event.target.value)
+                          }
+                        >
+                          {categories.map((category) => (
+                            <MenuItem key={category.id} value={category.id}>
+                              {category.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    </Field>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button color="warning" onClick={handleCloseForm}>
+                      Close
+                    </Button>
+                    <Button
+                      color="primary"
+                      disabled={isSubmitting}
+                      onClick={submitForm}
+                    >
+                      Add
+                    </Button>
+                  </DialogActions>
+                </Form>
+              )}
+            </Formik>
+          </Dialog>
+          <Button
+            variant="outlined"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleOpenMenu}
+          >
+            Categories
+          </Button>
+          <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
+            {categories.map((category) => (
+              <MenuItem
+                key={category.id}
+                onClick={() => handleMenuItemOnClick(category.id)}
+              >
+                {selectedCategories.some((x) => x.id === category.id) && (
+                  <ListItemIcon>
+                    <Check />
+                  </ListItemIcon>
+                )}
+                {category.name}
+              </MenuItem>
+            ))}
+          </Menu>
+          {selectedCategories.map((selectedCategory) => (
+            <Chip
+              key={selectedCategory.id}
+              label={selectedCategory.name}
+              onDelete={() => handleDelete(selectedCategory.id)}
+            />
+          ))}
+        </div>
         <Container className="grid grid-cols-3 gap-4">
           {displayedItems.map((item) => (
             <Link
