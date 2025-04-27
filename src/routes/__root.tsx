@@ -46,7 +46,11 @@ export const Route = createRootRoute({
           <Link to="/" className="text-4xl [&.active]:font-bold">
             Home
           </Link>
-          <div className="flex items-end gap-8 text-xl">
+          <div
+            className="
+              md:flex md:items-end md:gap-8 md:text-xl
+              hidden"
+          >
             <Link to="/items" className="[&.active]:font-bold">
               Items
             </Link>
