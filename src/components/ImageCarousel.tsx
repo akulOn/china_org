@@ -37,15 +37,13 @@ export default function ImageCarousel({
   };
 
   return (
-    <div className="relative">
+    <div className="relative rounded-b-4xl">
       <Link className="flex flex-col relative" to={route} params={routeParams}>
         <Typography
           className="
-            absolute
-            inset-x-0 top-0
-            z-10
+            absolute inset-x-0 top-0 z-10
             px-1
-          bg-gray-100/50
+          bg-brand-secondary
             hover:*:cursor-pointer hover:*:underline"
         >
           {header}
