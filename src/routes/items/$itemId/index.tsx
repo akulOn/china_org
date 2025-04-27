@@ -148,7 +148,7 @@ function RouteComponent() {
   const { itemId } = Route.useParams();
 
   return (
-    <Container className="flex flex-col justify-center gap-4">
+    <Container className="flex flex-col justify-center gap-4 pt-2">
       <div className="flex justify-center items-end gap-1">
         <SearchIcon />
         <TextField

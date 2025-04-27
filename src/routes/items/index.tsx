@@ -7,10 +7,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
-  Input,
-  InputAdornment,
-  InputLabel,
   ListItemIcon,
   Menu,
   MenuItem,
@@ -19,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
 import Check from "@mui/icons-material/Check";
 import { Formik, Form, Field } from "formik";
 
@@ -234,7 +231,7 @@ function RouteComponent() {
   }, [items.length]);
 
   return (
-    <Container className="flex flex-col justify-center gap-4 p-2">
+    <Container className="flex flex-col justify-center gap-4 pt-2">
       <div className="flex justify-center items-end gap-1">
         <SearchIcon />
         <TextField
@@ -253,9 +250,13 @@ function RouteComponent() {
           }}
         />
       </div>
-      <Container className="flex gap-2">
-        <div className="flex flex-col gap-4">
-          <Button variant="outlined" onClick={handleOpenForm}>
+      <Container className="flex">
+        <div className="flex flex-col gap-2">
+          <Button
+            variant="outlined"
+            startIcon={<AddIcon />}
+            onClick={handleOpenForm}
+          >
             Add item
           </Button>
           <Dialog open={formVisible} onClose={handleCloseForm}>
@@ -348,7 +349,7 @@ function RouteComponent() {
             aria-expanded={open ? "true" : undefined}
             onClick={handleOpenMenu}
           >
-            Categories
+            Filter By Categories
           </Button>
           <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
             {categories.map((category) => (
