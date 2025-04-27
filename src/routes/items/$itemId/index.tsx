@@ -5,6 +5,7 @@ import {
   Input,
   InputAdornment,
   InputLabel,
+  TextField,
   Typography,
 } from "@mui/material";
 
@@ -155,8 +156,27 @@ function RouteComponent() {
   const { itemId } = Route.useParams();
 
   return (
-    <Container className="flex justify-center gap-2">
-      <div className="flex flex-col gap-2">
+    <Container className="flex flex-col justify-center gap-4">
+      <div className="flex justify-center items-end gap-1">
+        <SearchIcon />
+        <TextField
+          label="Find option"
+          variant="standard"
+          id="input-with-icon-adornment"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setDisplayedOptions(
+              ...[
+                options.filter((option) =>
+                  option.name
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
+                ),
+              ]
+            );
+          }}
+        />
+      </div>
+      <Container className="flex gap-2">
         <Formik
           initialValues={
             {
@@ -194,33 +214,12 @@ function RouteComponent() {
             </Form>
           )}
         </Formik>
-      </div>
-      <Container className="flex flex-col gap-2">
-        <InputLabel htmlFor="input-with-icon-adornment">Find option</InputLabel>
-        <Input
-          id="input-with-icon-adornment"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          }
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setDisplayedOptions(
-              ...[
-                options.filter((option) =>
-                  option.name
-                    .toLowerCase()
-                    .includes(event.target.value.toLowerCase())
-                ),
-              ]
-            );
-          }}
-        />
+
         <Container
           className="
             grid
             grid-cols-1 lg:grid-cols-3
-            gap-2"
+            gap-4"
         >
           {displayedOptions.map((option) => (
             <ImageCarousel
